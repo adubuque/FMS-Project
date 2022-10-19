@@ -76,28 +76,28 @@ function drawPage(page) {
       push();
       rect(width / 2, height / 2, 100, 100);
 
-      text('Exercise 1', width / 2, height * 0.2);
+      text('Exercise 1: Apartment', width / 2, height * 0.2);
       pop();
       break;
     case 3:
       push();
       ellipse(width / 2, height / 2, 100);
 
-      text('Exercise 2', width / 2, height * 0.2);
+      text('Exercise 2: Drawing', width / 2, height * 0.2);
       pop();
       break;
     case 4:
       push()
       triangle(width/2, height/2-100, width/2 - 50, height/2, width/2+50, height/2);
       
-      text('Exercise 3', width / 2, height * 0.2);
+      text('Exercise 3: Maze', width / 2, height * 0.2);
       pop();
       break;
     case 5:
       push();
       arc(width/2, height/2, 50, 50, 0, HALF_PI);
       
-      text('Exercise 4', width / 2, height * 0.2);
+      text('Exercise 4: DJ', width / 2, height * 0.2);
       pop();
   }
 }
