@@ -1,0 +1,95 @@
+// Click and Drag an object
+let shapeX1;
+let shapeY1;
+let shapeX2;
+let shapeY2;
+let shapeX3;
+let shapeY3;
+let shapeX4;
+let shapeY4;
+
+const radius=  10;
+const diameter= radius *2;
+let shapeMove= false;
+
+
+function setup() {
+  createCanvas(500,500)
+  shapeX1 = 400;
+  shapeY1 = 300;
+}
+
+function draw() {
+
+  
+  background("blue")
+
+  //House below 
+  
+  // roof
+  stroke(0);
+  fill('brown');
+  triangle(25, 150, 225, 152, 130, 50);
+  
+  // house
+  fill('grey');
+  rect(25,150,199,200);
+  
+  // Room 1
+  fill('red');
+  rect(40,160, 60,60);
+   // Room 2
+  fill('yellow');
+  rect(150,160, 60,60);
+   // Room 3
+  fill('green');
+  rect(40,250, 60,60);
+   // Room 4
+  fill('magenta');
+  rect(150,250, 60,60);
+  
+  //door
+  fill('orange')
+  rect(110,300, 30, 50)
+  
+  //road
+  fill('black');
+  rect(223,300, 140, 50)
+  
+  fill('white')
+  rect(250,320, 30, 10)
+
+  fill('white')
+  rect(310,320, 30, 10)
+  
+  //parking Lot
+  fill('grey')
+  rect(360, 200, 120, 260)
+  
+  // sun
+  noStroke();
+  fill(255,255,0);
+  ellipse(60,60,30,30);
+  
+
+}
+
+function mousePressed() {
+  let d = dist(mouseX,mouseY,shapeX1,shapeY1)
+  if(d<radius){
+    shameMove= true;
+  } else{
+    shapeMove = false;
+  }
+  }
+
+function mouseReleased() {
+  shapeMove = false;
+}
+
+function mouseDragged(){
+  if(shapeMove){
+    shapeX1 = mouseX
+    shapeY1 = mouseY
+  }
+}
