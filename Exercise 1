@@ -1,29 +1,40 @@
 // Click and Drag an object
-let shapeX1;
-let shapeY1;
-let shapeX2;
-let shapeY2;
-let shapeX3;
-let shapeY3;
-let shapeX4;
-let shapeY4;
-
-const radius=  10;
-const diameter= radius *2;
-let shapeMove= false;
+let shape1;
+let shape2;
+let shape3;
+let shape4;
 
 
-function setup() {
+function setup(){
   createCanvas(500,500)
-  shapeX1 = 400;
-  shapeY1 = 300;
+  shape1 = new Draggable1(410, 280, 50, 50);
+  shape2 = new Draggable2(410, 220, 50, 50);
+  shape3 = new Draggable3(410, 340, 50, 50);
+  shape4 = new Draggable4(410, 400, 50, 50);
+  room1 = new rect1(40,160,60,60);
+  room2 = new rect2(150,160,60,60);
+  room3 = new rect3(40,250,60,60);
+  room4 = new rect4(150,250,60,60);
+  
 }
 
+
 function draw() {
+  background("blue")
+  
+   var score = 0;
+  fill('white');
+  textSize(24);
+  text("Score: " + score, 10, 25);
+  
+//collision 
+  var d = dist(room1.x, room1.y,shape1.x,shape1.y);
+  if (d < 10) {
+  score = score + 5;
+  }
 
   
-  background("blue")
-
+  
   //House below 
   
   // roof
@@ -35,18 +46,15 @@ function draw() {
   fill('grey');
   rect(25,150,199,200);
   
-  // Room 1
-  fill('red');
-  rect(40,160, 60,60);
-   // Room 2
-  fill('yellow');
-  rect(150,160, 60,60);
-   // Room 3
-  fill('green');
-  rect(40,250, 60,60);
-   // Room 4
-  fill('magenta');
-  rect(150,250, 60,60);
+  // Rooms
+  //rooms
+  room1.display();
+
+  room2.display();
+
+  room3.display();
+  
+  room4.display();
   
   //door
   fill('orange')
@@ -72,24 +80,332 @@ function draw() {
   ellipse(60,60,30,30);
   
 
-}
+  
+  //People 
+  shape1.over();
+  shape1.update();
+  shape1.show();
+  
+  shape2.over();
+  shape2.update();
+  shape2.show();
+  
+  shape3.over();
+  shape3.update();
+  shape3.show();
+  
+  shape4.over();
+  shape4.update();
+  shape4.show();
 
+}
 function mousePressed() {
-  let d = dist(mouseX,mouseY,shapeX1,shapeY1)
-  if(d<radius){
-    shameMove= true;
-  } else{
-    shapeMove = false;
-  }
-  }
+  shape1.pressed();
+  shape2.pressed();
+  shape3.pressed();
+  shape4.pressed();
+}
 
 function mouseReleased() {
-  shapeMove = false;
+  shape1.released();
+  shape2.released();
+  shape3.released();
+  shape4.released();
 }
 
-function mouseDragged(){
-  if(shapeMove){
-    shapeX1 = mouseX
-    shapeY1 = mouseY
+
+
+
+
+
+
+///draggable
+class Draggable1 {
+  constructor(x, y, w, h) {
+    this.dragging = false; // Is the object being dragged?
+    this.rollover = false; // Is the mouse over the ellipse?
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.offsetX = 0;
+    this.offsetY = 0;
   }
+
+  over() {
+    // Is mouse over object
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.rollover = true;
+    } else {
+      this.rollover = false;
+    }
+  }
+
+  update() {
+    // Adjust location if being dragged
+    if (this.dragging) {
+      this.x = mouseX + this.offsetX;
+      this.y = mouseY + this.offsetY;
+    }
+  }
+
+  show() {
+    stroke(0);
+    // Different fill based on state
+    if (this.dragging) {
+      fill('red');
+    } else if (this.rollover) {
+      fill(100);
+    } else {
+      fill(175, 200);
+    }
+    rect(this.x, this.y, this.w,this.h);
+  }
+
+  pressed() {
+    // Did I click on the rectangle?
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.dragging = true;
+      // If so, keep track of relative location of click to corner of rectangle
+      this.offsetX = this.x - mouseX;
+      this.offsetY = this.y - mouseY;
+    }
+  }
+
+  released() {
+    // Quit dragging
+    this.dragging = false;
+  }
+}
+
+class Draggable2 {
+  constructor(x, y, w, h) {
+    this.dragging = false; // Is the object being dragged?
+    this.rollover = false; // Is the mouse over the ellipse?
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.offsetX = 0;
+    this.offsetY = 0;
+  }
+
+  over() {
+    // Is mouse over object
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.rollover = true;
+    } else {
+      this.rollover = false;
+    }
+  }
+
+  update() {
+    // Adjust location if being dragged
+    if (this.dragging) {
+      this.x = mouseX + this.offsetX;
+      this.y = mouseY + this.offsetY;
+    }
+  }
+
+  show() {
+    stroke(0);
+    // Different fill based on state
+    if (this.dragging) {
+      fill('green');
+    } else if (this.rollover) {
+      fill(100);
+    } else {
+      fill(175, 200);
+    }
+    rect(this.x, this.y, this.w,this.h);
+  }
+
+  pressed() {
+    // Did I click on the rectangle?
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.dragging = true;
+      // If so, keep track of relative location of click to corner of rectangle
+      this.offsetX = this.x - mouseX;
+      this.offsetY = this.y - mouseY;
+    }
+  }
+
+  released() {
+    // Quit dragging
+    this.dragging = false;
+  }
+}
+class Draggable3 {
+  constructor(x, y, w, h) {
+    this.dragging = false; // Is the object being dragged?
+    this.rollover = false; // Is the mouse over the ellipse?
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.offsetX = 0;
+    this.offsetY = 0;
+  }
+
+  over() {
+    // Is mouse over object
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.rollover = true;
+    } else {
+      this.rollover = false;
+    }
+  }
+
+  update() {
+    // Adjust location if being dragged
+    if (this.dragging) {
+      this.x = mouseX + this.offsetX;
+      this.y = mouseY + this.offsetY;
+    }
+  }
+
+  show() {
+    stroke(0);
+    // Different fill based on state
+    if (this.dragging) {
+      fill('magenta');
+    } else if (this.rollover) {
+      fill(100);
+    } else {
+      fill(175, 200);
+    }
+    rect(this.x, this.y, this.w,this.h);
+  }
+
+  pressed() {
+    // Did I click on the rectangle?
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.dragging = true;
+      // If so, keep track of relative location of click to corner of rectangle
+      this.offsetX = this.x - mouseX;
+      this.offsetY = this.y - mouseY;
+    }
+  }
+
+  released() {
+    // Quit dragging
+    this.dragging = false;
+  }
+}
+class Draggable4 {
+  constructor(x, y, w, h) {
+    this.dragging = false; // Is the object being dragged?
+    this.rollover = false; // Is the mouse over the ellipse?
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.offsetX = 0;
+    this.offsetY = 0;
+  }
+
+  over() {
+    // Is mouse over object
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.rollover = true;
+    } else {
+      this.rollover = false;
+    }
+  }
+
+  update() {
+    // Adjust location if being dragged
+    if (this.dragging) {
+      this.x = mouseX + this.offsetX;
+      this.y = mouseY + this.offsetY;
+    }
+  }
+
+  show() {
+    stroke(0);
+    // Different fill based on state
+    if (this.dragging) {
+      fill('yellow');
+    } else if (this.rollover) {
+      fill(100);
+    } else {
+      fill(175, 200);
+    }
+    rect(this.x, this.y, this.w,this.h);
+
+  }
+
+  pressed() {
+    // Did I click on the rectangle?
+    if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
+      this.dragging = true;
+      // If so, keep track of relative location of click to corner of rectangle
+      this.offsetX = this.x - mouseX;
+      this.offsetY = this.y - mouseY;
+    }
+  }
+
+  released() {
+    // Quit dragging
+    this.dragging = false;
+  }
+}
+
+//rect
+function rect1(x,y,w,h){
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  
+  this.display = function() {
+  stroke(500)
+  fill('red')
+  rect(this.x,this.y,this.w,this.h);
+}
+}
+
+
+//rect
+function rect2(x,y,w,h){
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  
+  this.display = function() {
+  stroke(500)
+  fill('yellow')
+  rect(this.x,this.y,this.w,this.h);
+}
+}
+
+
+//rect
+function rect3(x,y,w,h){
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  
+  this.display = function() {
+  stroke(500)
+  fill('green')
+  rect(this.x,this.y,this.w,this.h);
+}
+}
+
+
+//rect
+function rect4(x,y,w,h){
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  
+  this.display = function() {
+  stroke(500)
+  fill('magenta')
+  rect(this.x,this.y,this.w,this.h);
+}
 }
