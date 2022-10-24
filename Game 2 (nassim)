@@ -1,0 +1,62 @@
+var score = 0;
+function setup() {
+  createCanvas(500, 500);
+  housebody = new rect1(150,150,200,200);
+  roofbody = new roof(150,150,350,150,250,50);
+}
+
+function draw() {
+  background('grey');
+  //score board
+   fill('black');
+  textSize(24);
+  text("Score: " + score, 10, 25);
+  
+  //display house
+  housebody.display();
+  roofbody.display();
+  
+  //windows & door
+  fill('white')
+  rect(160,190,60,60)
+  fill('brown')
+  rect(230,290,40,60)
+  fill('white')
+  rect(280,190,60,60)
+  
+  fill(255,255,0);
+  noStroke();
+  ellipse(240, 330, 10,10);
+  
+  
+  // 
+}
+
+//roof function
+function roof(x1,y1,x2,y2,x3,y3){
+this.x1 = x1;
+this.y1 = y1;
+this.x2 = x2;
+this.y2 = y2;
+this.x3 = x3;
+this.y3 = y3;
+  
+  this.display = function() {
+  stroke(500)
+  fill('brown')
+  triangle(this.x1,this.y1,this.x2,this.y2,this.x3,this.y3);
+}
+}
+//house function
+function rect1(x,y,w,h){
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  
+  this.display = function() {
+  stroke(500)
+  fill('gold')
+  rect(this.x,this.y,this.w,this.h);
+}
+}
