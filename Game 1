@@ -3,7 +3,8 @@ let shape1;
 let shape2;
 let shape3;
 let shape4;
-
+var score = 0;
+var i = 0;
 
 function setup(){
   createCanvas(500,500)
@@ -16,23 +17,53 @@ function setup(){
   room3 = new rect3(40,250,60,60);
   room4 = new rect4(150,250,60,60);
   
+  
+  
 }
 
+var scoreAdded1 = false;
+var scoreAdded2 = false;
+var scoreAdded3 = false;
+var scoreAdded4 = false;
 
 function draw() {
-  background("blue")
+  background("black")
   
-   var score = 0;
   fill('white');
   textSize(24);
   text("Score: " + score, 10, 25);
   
 //collision 
-  var d = dist(room1.x, room1.y,shape1.x,shape1.y);
-  if (d < 10) {
-  score = score + 5;
-  }
-
+  
+  var d1 = dist(room1.x, room1.y,shape1.x,shape1.y);
+  for (i= 0; i<=1;++i){
+    if ( d1 < 10 && !scoreAdded1) {
+     score += 5;
+      scoreAdded1 = true;
+    }
+}
+    var d2 = dist(room2.x, room2.y,shape2.x,shape2.y);
+  for (i= 0; i<=1;++i){
+    if ( d2 < 10 && !scoreAdded2) {
+     score += 5;
+      scoreAdded2 = true;
+    }
+}
+    var d3 = dist(room3.x, room3.y,shape3.x,shape3.y);
+  for (i= 0; i<=1;++i){
+    if ( d3 < 10 && !scoreAdded3) {
+     score += 5;
+      scoreAdded3 = true;
+    }
+}
+  
+    var d4 = dist(room4.x, room4.y,shape4.x,shape4.y);
+  for (i= 0; i<=1;++i){
+    if ( d4 < 10 && !scoreAdded4) {
+     score += 5;
+      scoreAdded4 = true;
+    }
+}
   
   
   //House below 
@@ -43,7 +74,7 @@ function draw() {
   triangle(25, 150, 225, 152, 130, 50);
   
   // house
-  fill('grey');
+  fill('gray');
   rect(25,150,199,200);
   
   // Rooms
@@ -268,7 +299,7 @@ class Draggable3 {
     stroke(0);
     // Different fill based on state
     if (this.dragging) {
-      fill('magenta');
+      fill('yellow');
     } else if (this.rollover) {
       fill(100);
     } else {
@@ -325,7 +356,7 @@ class Draggable4 {
     stroke(0);
     // Different fill based on state
     if (this.dragging) {
-      fill('yellow');
+      fill('magenta');
     } else if (this.rollover) {
       fill(100);
     } else {
@@ -375,7 +406,7 @@ function rect2(x,y,w,h){
   
   this.display = function() {
   stroke(500)
-  fill('yellow')
+  fill('green')
   rect(this.x,this.y,this.w,this.h);
 }
 }
@@ -390,7 +421,7 @@ function rect3(x,y,w,h){
   
   this.display = function() {
   stroke(500)
-  fill('green')
+  fill('yellow')
   rect(this.x,this.y,this.w,this.h);
 }
 }
