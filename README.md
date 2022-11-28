@@ -8,6 +8,7 @@ Exercise 2: Maze
 
 Exercise 3: DJ
 
-The game's code is located in "sketch.js"
+To play the game, download the FMS-Games-Download Folder.
 
-IMPORTANT: You need to download "lose.mp3" and "correct.mp3" in order for the game's audio features to properly function. 
+IMPORTANT: You need to download "lose.mp3" and "correct.mp3" in order for the game's audio features to properly function.
+These should be included in the FMS-Games-Download Folder.
